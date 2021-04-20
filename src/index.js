@@ -10,7 +10,12 @@ const port = process.env.PORT || 3000
 app.use(express.json())
 
 app.get('/tasks', (req, res) => {
-    Task.find({}).then((tasks) => res.send(tasks)).catch((err) => res.status(500).send(err))
+    Task.find({}).then((tasks) => res.send(tasks)).catch((err) => res.status(500).send())
+})
+
+app.get('/tasks/:id', (req, res) => {
+    const id = req.params.id
+    Task.findById(id).then((task) => res.send(task)).catch((err) => res.status(500).send())
 })
 
 app.post('/tasks', (req, res) => {
@@ -19,7 +24,12 @@ app.post('/tasks', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-    User.find({}).then((users) => res.send(users)).catch((err) => res.status(500).send(err))
+    User.find({}).then((users) => res.send(users)).catch((err) => res.status(500).send())
+})
+
+app.get('/users/:id', (req, res) => {
+    const id = req.params.id
+    User.findById(id).then((user) => res.send(user)).catch((err) => res.status(500).send())
 })
 
 app.post('/users', (req, res) => {
