@@ -15,7 +15,12 @@ app.get('/tasks', (req, res) => {
 
 app.get('/tasks/:id', (req, res) => {
     const id = req.params.id
-    Task.findById(id).then((task) => res.send(task)).catch((err) => res.status(500).send())
+    Task.findById(id).then((task) => {
+        if(!task){
+            return res.status(404).send()
+        }
+        res.send(task)
+    }).catch((err) => res.status(500).send())
 })
 
 app.post('/tasks', (req, res) => {
@@ -29,7 +34,12 @@ app.get('/users', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
     const id = req.params.id
-    User.findById(id).then((user) => res.send(user)).catch((err) => res.status(500).send())
+    User.findById(id).then((user) => {
+        if(!user){
+            return res.status(404).send()
+        }
+        res.send(user)
+    }).catch((err) => res.status(500).send())
 })
 
 app.post('/users', (req, res) => {
