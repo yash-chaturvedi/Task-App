@@ -37,6 +37,15 @@ router.post('/users', async (req, res) => {
     }
 })
 
+router.post('/users/login', async (req, res) => {
+    try{
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        res.send(user)
+    }catch(e){
+        res.status(400).send({error : e.message})
+    }
+})
+
 router.patch('/users/:id', async (req, res) => {
     const allowedUpdates = ['name', 'age', 'password', 'email']
     const updates = Object.keys(req.body)
