@@ -45,7 +45,7 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken()
         res.send({user,token})
     }catch(e){
-        res.status(400).send({error : e.message})
+        res.status(400).send()
     }
 })
 
@@ -106,7 +106,7 @@ router.patch('/users/me', auth, async (req, res) => {
         await req.user.save()
         res.send(req.user)
     }catch(e){
-        res.status(400).send(e)
+        res.status(400).send()
     }
 })
 
