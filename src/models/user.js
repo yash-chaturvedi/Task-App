@@ -66,14 +66,14 @@ userSchema.methods.toJSON = function (){
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = await jwt.sign({_id : user._id.toString()}, process.env.BCRYPT_SECRET)
+    const token = await jwt.sign({_id : user._id.toString()}, process.env.JWT_SECRET)
     user.tokens = user.tokens.concat({token})
     await user.save()
     return token
 }
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    console.log(email, password);
+
     const user = await User.findOne({email}) 
     if(!user){
         throw new Error('Login Failed !')
