@@ -6,4 +6,5 @@
 - User can add profile pic
 - Email updates to User
 - Encrypted password storage
+- Pagination, sorting and search
 - Testing using Jest
